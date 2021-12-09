@@ -1,0 +1,1372 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+$id=$this->uri->segment(2);
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>fonts/materialdesignicons.min.css">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>images/favicon.png" />
+
+<style> 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 10px;
+    bottom: 6px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.nav-tabs {
+    padding-left: 59px !important;
+}
+
+.nav-tabs li a.active {
+    border-bottom: 2px solid #5369f8!important;
+    -webkit-border-radius: 360px;
+    -moz-border-radius: 360px;
+    border-radius: 360px;
+}
+
+.nav-pills>li>a, .nav-tabs>li>a {
+    font-size: 16px !important;
+    padding: 10px 16px !important;
+}
+
+.nav-pills>li>a, .nav-tabs>li>a {
+    font-weight: normal !important;
+}
+
+.card .card-body {
+   padding: 20px 0px !important;
+}
+
+.card{margin-bottom: 0 !important;}
+.content-wrapper{padding-top: 0 !important;}
+.ratsec{margin: 20px 0;}
+</style>
+
+
+<script>
+function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
+
+
+</head>
+<body>
+<div class="container-scroller">
+<?php include('template/upload-new-game.php'); ?>
+
+<div class="container-fluid page-body-wrapper">
+<div class="row row-offcanvas row-offcanvas-right">
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<ul class="nav">
+  
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'games-published'; ?>">
+        <span class="menu-title"><i class="mdi mdi-arrow-left"></i> Back to Game</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'upload-new-games/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> General Infomation</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'game-rating/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Rating</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'game-short-review/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Short Review</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'game-tips-and-tricks/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Tips and Tricks</span>
+  </a>
+</li>
+
+
+</ul>
+</nav>
+
+<div class="content-wrapper">
+  <div id="about" class="about-area area-padding">
+    <div class="container">
+
+
+<!-- 0 row -->
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body ptb64">
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ratsec">
+        <h4 class="header-title mt-0 mb-1 topcont" style="font-size: 22px;">Content Rating 
+          <span>
+            <?=$content[0]->rating?>
+            <i class="mdi mdi-star"></i>
+            <!-- <i class="mdi mdi-star"></i>
+            <i class="mdi mdi-star"></i>
+            <i class="mdi mdi-star-outline"></i>
+            <i class="mdi mdi-star-outline"></i> -->
+          </span>
+          </h4>
+         </div>
+
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ratsec">
+            <h4 class="header-title mt-0 mb-1 topcont" style="font-size: 22px;">Allowed Age 
+              <span><?=$content[0]->age?> +</span>
+            </h4>
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ratsec">
+            <h4 class="header-title mt-0 mb-1 topcont" style="font-size: 22px;">
+
+             PG Status<br>
+             <?php if($content[0]->pgStatus==1){?>
+               <a href="<?=base_url_index?>OttContent/pgStatusActivate/0/<?=$id?>"> Active</a>
+             <?php }else{?>
+               <a href="<?=base_url_index?>OttContent/pgStatusActivate/1/<?=$id?>"> Inactive</a>
+             <?php }?>
+          
+          
+
+
+
+
+            </h4>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-responsive">
+
+
+<!-- 0 row -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-responsive">
+
+
+<!-- Chat Bar -->
+<script type="text/javascript">
+window.onload = function () {
+
+    CanvasJS.addColorSet("greenShades",
+                [//colorSet Array
+                "<?=wrng_ratingCalCategoryColor(1)?>",
+                "<?=wrng_ratingCalCategoryColor(2)?>",
+                "<?=wrng_ratingCalCategoryColor(3)?>",
+                "<?=wrng_ratingCalCategoryColor(4)?>",
+                 "<?=wrng_ratingCalCategoryColor(5)?>",
+                 "<?=wrng_ratingCalCategoryColor(6)?>",
+                "<?=wrng_ratingCalCategoryColor(7)?>",
+                "<?=wrng_ratingCalCategoryColor(8)?>",
+                "<?=wrng_ratingCalCategoryColor(9)?>",
+                "<?=wrng_ratingCalCategoryColor(10)?>"                
+                ]);
+var chart = new CanvasJS.Chart("chartContainer", {
+  //theme: "light1", // "light2", "dark1", "dark2"
+  animationEnabled: true, // change to true    
+   colorSet: "greenShades",
+  title:{ 
+    text: "CATEGORY RATING"
+  },
+ axisY: [
+  {
+    title: "RATING",
+     maximum: 5,
+  }
+],
+axisX: [
+  {
+    title: "CATEGORY",
+  }
+],
+  data: [
+  {
+    type: "column",
+      dataPoints: [
+      { label: "Postive MSG",  y: <?php echo $positiveRating ? $positiveRating[0]->ratning : 0 ?>  },
+      { label: "Education values", y:  <?php echo $educationRating ? $educationRating[0]->ratning : 0 ?> },
+      { label: "PositiveLearning",  y: <?php echo $PositiveLearningRatingValue ? $PositiveLearningRatingValue[0]->ratning : 0 ?>  },
+      { label: "Risk", y:   <?php echo $RiskRating ? $RiskRating[0]->ratning : 0 ?>},
+      { label: "Positive and Nudity",  y: <?php echo $PositiveRating ? $PositiveRating[0]->ratning : 0 ?>  },
+      { label: "Negative language",  y: <?php echo $NegativeRatingValue ? $NegativeRatingValue[0]->ratning : 0 ?>  },
+      { label: "Additional Abuse",  y: <?php echo $AdditionalRating ? $AdditionalRating[0]->ratning : 0 ?>  },
+      { label: "Drinking, Drugs, Smoking",  y: <?php echo $drinkingRating ? $drinkingRating[0]->ratning : 0 ?>  },
+      { label: "Stereotype",  y: <?php echo $stereotypeRating ? $stereotypeRating[0]->ratning : 0 ?>  },
+      { label: "Positiveism",  y: <?php echo $PositiveismRating ? $PositiveismRating[0]->ratning : 0 ?>  },
+    ]
+  }
+  ]
+});
+chart.render();
+  
+}
+</script> 
+
+
+
+<div class="fullbox">
+<div class="col-md-12 chart" id="chartContainer" style="height: 300px; padding: 0; width: 100%; margin: 0 auto; overflow: hidden;"></div>
+<div class="whiteolap"></div>
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+<!-- End Chat Bar -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 0 row end -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 0 row end -->
+
+
+
+
+
+<section>
+  <div class="app-sec" style="margin-top: 60px;">
+    <div class="container">
+      <div class="row">
+        <div class="wrapper">
+          <div class="container">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+
+              <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+                <li role="presentation" class="active"> <a href="#SafetyFeatures" id="SafetyFeatures-tab" role="tab" data-toggle="tab" aria-controls="SafetyFeatures" aria-expanded="true"> <span class="text">Safety Features</span> </a> </li>
+                <li role="presentation"> <a href="#RisktoPrivacy" role="tab" id="RisktoPrivacy-tab" data-toggle="tab" aria-controls="RisktoPrivacy"> <span class="text">Risk to Privacy</span> </a> </li>
+                <li role="presentation"> <a href="#PositiveLearning" role="tab" id="PositiveLearning-tab" data-toggle="tab" aria-controls="PositiveLearning"> <span class="text">Positive Learning</span> </a> </li>
+                <li role="presentation"> <a href="#NegativeFeatures" role="tab" id="NegativeFeatures-tab" data-toggle="tab" aria-controls="NegativeFeatures"> <span class="text">Negative Features</span> </a> </li></span> </a> </li>
+              </ul>
+
+              <div id="myTabContent" class="tab-content">
+
+
+                <div role="tabpanel" class="tab-pane fade in active" id="SafetyFeatures" aria-labelledby="SafetyFeatures-tab">
+                  <!-- 1 row -->      
+<form method="post" action="">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Safety Features
+          <br><br></h4>
+        <div class="table-responsive">
+          <table class="table m-0">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Category</th>
+                <th>Range</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td></td> 
+                <td>Average time spent in this game (in minutes)</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Virtual reality/ artifical Intelligence services</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Parental Control for financial transactions</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Secure payment method for In-app purchases</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Premium SMS Access</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Tap and Pay</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr> 
+
+              <tr>
+                <td></td> 
+                <td>Access/ Login via third party allowed</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Access to/via third party content</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Third party interface</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>Allows multiple users</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Device discoverability</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Install unknown apps</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>SUM ‘Safety Features’</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="nationBuilding">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==1){ echo "selected";}?>>Yes</option>
+                        <option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,1,1)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>            
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Brief description of 'Safety Features ’ in the App (25-50 words) *<br><br></h4>
+        <div class="table-responsive">
+          <div class="form-group">
+              <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+              <textarea name="desc" cols="" rows="5" placeholder="Brief description of Positive Messages in the show (25-50 words)
+" class="form-control ckeditor"><?=descMoralbord($id,1)?></textarea>
+             
+              <input name="positiveMessages" type="submit" class="btn btn-primary mb-2" style="margin-top: 20px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<!-- 1 row end --> 
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane fade" id="RisktoPrivacy" aria-labelledby="RisktoPrivacy-tab">
+                  <!-- RisktoPrivacy Values row -->      
+<form method="post" action="">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Risk to Privacy<br><br></h4>
+        <div class="table-responsive">
+
+        <table class="table m-0">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Category</th>
+                <th>Range</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td></td> 
+                <td>Body sensors</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Bio-metrics (Finger Print/ Face or Photo Recognization/Retina Recognization)</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Camera</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Contact</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Location</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Microphone</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Physical Activity</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>SMS</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>Storage</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Telephone</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Unrestricted Data</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Usage Access</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>Preventing phone from sleeping</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Photo access/ Download (Public/Friends)</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Video Access/ Download (public/ Friends)</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>Screen Sharing</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>File Sharing/ Download</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Live Location Share</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>SUM ‘Privacy/ Permission access’</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      <select class="form-control custom-select" name="informative">
+                        <option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==1){ echo "selected";}?>>Yes</option>
+                        <option value="2" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,2,5)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Brief description of ‘Privacy/ Permission access' in the Gaming App (25-50 words) *<br><br></h4>
+        <div class="table-responsive">
+          <div class="form-group">
+              <textarea name="desc" cols="" rows="5" placeholder="Brief description of RisktoPrivacy Values in the show (25-50 words)
+" class="form-control ckeditor"><?=descMoralbord($id,2)?></textarea>
+              <input name="RisktoPrivacyValues"  type="submit" class="btn btn-primary mb-2" style="margin-top: 20px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<!-- RisktoPrivacy Values row end --> 
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane fade" id="PositiveLearning" aria-labelledby="PositiveLearning-tab">
+                  <!-- PositiveLearning Values row -->   
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Positive Learning<br><br></h4>
+        <div class="table-responsive">
+
+        <form method="post" action="">     
+          <table class="table m-0">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Category</th>
+                <th>Range</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td></td> 
+                <td>Educational Values</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Thinking and Reasoning</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="3" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Skills</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="3" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>Learning</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="3" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+
+              <tr>
+                <td></td> 
+                <td>DIY</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="3" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+              <tr>
+                <td></td> 
+                <td>SUM ‘Positive Learning’</td>  
+                <td><div class="form-group row">
+                    <div class="col-lg-10">
+                      
+                    <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="3" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td></td> 
+                <td></td> 
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Brief description of 'Positive Learning' in the Gaming App (25-50 words) *<br><br></h4>
+        <div class="table-responsive">
+          <div class="form-group">
+              <textarea name="desc" cols="" rows="5" placeholder="Brief description of PositiveLearning in the show (25-50 words)
+" class="form-control ckeditor"><?=descMoralbord($id,3)?></textarea>
+              <input type="submit" name="PositiveLearningValues" class="btn btn-primary mb-2" style="margin-top: 20px;">
+          </div>
+        </div>
+      </div>
+</form>
+
+
+    </div>
+  </div>
+</div>
+<!-- PositiveLearning row end --> 
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane fade" id="NegativeFeatures" aria-labelledby="NegativeFeatures-tab">
+                  <!-- row -->      
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mt-0 mb-1">Negative Features</h4>
+        <div class="table-responsive">
+
+        <form method="post" action="">     
+
+<table class="table m-0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Category</th>
+      <th>Range</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td></td> 
+      <td>Violence</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Abusive Language</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Child Abuse</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Sex & Nudity</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Drinking, Drugs, Smoking</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Consumerism</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Stereotype</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>Sexism</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+    <tr>
+      <td></td> 
+      <td>SUM ‘Negative Features’</td>  
+      <td><div class="form-group row">
+          <div class="col-lg-10">
+            
+          <select class="form-control" name="PositiveLearningRange">
+<option value="1" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==1){ echo "selected";}?>>Yes</option>
+<option value="0" <?php if(valueAllAtributs('wrng_contentthematicrating',$id,3,37)==3){ echo "selected";}?>>No</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td></td> 
+      <td></td> 
+    </tr>
+
+  </tbody>
+</table>
+</div>
+</div>
+<div class="card-body">
+<h4 class="header-title mt-0 mb-1">Brief description of 'Negative Features’ in the Gaming App (25-50 words) *<br><br></h4>
+<div class="table-responsive">
+<div class="form-group">
+    <textarea name="desc" cols="" rows="5" placeholder="Brief description of PositiveLearning in the show (25-50 words)
+" class="form-control ckeditor"><?=descMoralbord($id,3)?></textarea>
+    <input type="submit" name="PositiveLearningValues" class="btn btn-primary mb-2" style="margin-top: 20px;">
+</div>
+</div>
+</div>
+</form>
+
+
+
+    </div>
+  </div>
+</div>
+<!--  row end -->
+                </div>
+
+
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+<style>
+.wrapper{width: 100%;}
+.bs-example-tabs ul li{margin-bottom: 20px;}
+.nav-pills>li>a, .nav-tabs>li>a{font-size: 16px !important;}
+.fade:not(.show) {
+    opacity: 1 !important;
+}
+</style>
+
+
+
+
+<script>
+function showingMsg2(did) { 
+  $('#pubIdSh2').html(did);
+}
+function myFunction1() { 
+  condemnId=$('#condId').val();
+  $('#myModa22').modal("hide");
+  var urlI='<?php echo base_url(); ?>deletereviewer/'+condemnId;
+  window.location.href = urlI;
+}
+</script>   
+<script type="text/javascript">
+                CKEDITOR.replaceClass ( 'ckeditor' );
+                CKEDITOR.add            
+</script>
+
+    
+        <?php include('template/footer.php'); ?>
+      </div>
+    </div>
+  </div>
+
+  <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/popper.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/perfect-scrollbar.jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/Chart.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/off-canvas.js"></script>
+  <script src="<?php echo base_url(); ?>js/misc.js"></script>
+  <script src="<?php echo base_url(); ?>js/dashboard.js"></script>
+</body>
+
+</html>

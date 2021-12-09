@@ -1,0 +1,140 @@
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <div class="row page-title">
+                            <div class="col-md-12">
+                                <nav aria-label="breadcrumb" class="float-right mt-1">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Wranga</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Section-1</li>
+                                    </ol>
+                                </nav>
+                                <h4 class="mb-1 mt-0">Section-1: General Information</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mt-0">General Information</h4>
+                                        <p class="sub-header">
+                                            
+                                        </p>
+
+                                        <form class="form-horizontal" action="" method="post">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Reviewer ID</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" name="reviewerId" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Name of Platform</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                                <span class="help-block"><small>(eg. Netflix, Amazon Prime, Hotstar, YouTube, ZEE5 etc).</small></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Title of the Video content</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Type of Video content </label>
+                                                        <div class="col-lg-10">
+                                                          <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                                <span class="help-block"><small>(movie, short film, series episode).</small></span>
+                                                        </div>
+                                                  </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">If Series, season and episode </label>
+                                                        <div class="col-lg-10">
+                                                          <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                                <span class="help-block"><small>(eg.SE1-EP1).</small></span>
+                                                        </div>
+                                                  </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Language of the video</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                                <span class="help-block"><small>(English, Hindi, Other regional languages).</small></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Release Year</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Name of the director</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Provide the URL of the video</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput">Genre</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" class="form-control" id="simpleinput"
+                                                                value="">
+                                                                <span class="help-block"><small>Epic / History / War / Crime / Thriller / Horror / Sci-fi / Fantasy / Adventure / Sports / Musical / Entertainment / DramaRomance / Comedy / RomComTrue Story / Documentary Animation /  Any Other (Please specify).
+</small></span>
+                                                        </div>
+                                                    </div>
+                                               <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label"
+                                                            for="simpleinput"></label>
+                                                        <div class="col-lg-10">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                
+                                        </form>
+            
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card-->
+                            </div><!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        
+                    </div> <!-- container-fluid -->
+
+                </div> <!-- content -->

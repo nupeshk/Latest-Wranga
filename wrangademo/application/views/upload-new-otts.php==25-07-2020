@@ -1,0 +1,553 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>fonts/materialdesignicons.min.css">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>images/favicon.png" />
+
+<style> 
+.gall{float: left;}
+.castdel{font-size: 21px; color: #690088; float: left;}
+.gall img{width: 100%; height: auto;}
+.ottfloat{float: left;}
+.table td, .table th{padding: 0 !important; border-top: none !important;}
+</style>
+
+</head>
+<body>
+<div class="container-scroller">
+<?php include('template/upload-new-otts.php'); ?>
+
+<div class="container-fluid page-body-wrapper">
+<div class="row row-offcanvas row-offcanvas-right">
+  
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<ul class="nav">
+  
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'published-otts'; ?>">
+    <span class="menu-title"><i class="mdi mdi-arrow-left"></i> Back To OTT</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'#'; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> General Infomation</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'rating/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Rating</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'short-review/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Short Review</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="<?php echo base_url_index.'tips-and-tricks/'.$id; ?>">
+    <span class="menu-title"><i class="mdi mdi-chevron-right"></i> Tips and Tricks</span>
+  </a>
+</li>
+
+
+</ul>
+</nav>
+
+
+<div class="content-wrapper">
+  <div id="about" class="about-area area-padding">
+    <div class="container">
+      <div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body"> 
+        <!-- <h5 class="header-title mb-4 mt-0">General Information</h5>-->
+        <div class="custom-accordion accordion ml-4" id="customaccordion_exa">
+          <div class="card mb-1"> <a href="" class="text-dark" data-toggle="collapse" data-target="#customaccorcollapseOne" aria-expanded="true" aria-controls="customaccorcollapseOne">
+            <div class="card-header" id="customaccorheadingOne">
+              <h5 class="m-0 font-size-14"> <i class="uil uil-question-circle h3 text-primary icon"></i> General Information </h5>
+            </div>
+            </a>
+      <form method="post" action="" enctype="multipart/form-data">     
+            <div id="customaccorcollapseOne" class="collapse show" aria-labelledby="customaccorheadingOne" data-parent="#customaccordion_exa">
+              <div class="card-body text-muted">
+
+                <div class="ottfloat col-md-6">
+                  <label class="col-lg-12 col-form-label">Title</label>
+                  <div class="col-lg-12">
+                    <input type="title" class="form-control" id="title" value="<?=$content[0]->title?>" name="title">
+                  </div>
+                </div>
+
+                <div class="ottfloat col-md-3">
+                  <label class="col-lg-12 col-form-label">Select OTT Language</label>
+                  <div class="col-lg-12">
+                    <select class="form-control custom-select" id="sub_catgId" name="sub_catgId" placeholder="Subcatagories">
+                      <?php foreach ($wrng_language as $key => $wrng_language) {?>
+                      <option value="<?=$wrng_language->lId?>"><?=$wrng_language->lName?></option>
+                     <?php } ?>  
+                    </select>
+                  </div>
+                </div>
+
+                <!-- <hr style="margin: 50px 0;"> -->
+
+                <div class="ottfloat col-md-3">
+                  <label class="col-lg-12 col-form-label">Subcatagories</label>
+                  <div class="col-lg-12">
+                    <select class="form-control custom-select" id="sub_catgId" name="sub_catgId" placeholder="Subcatagories">
+                      <option value="">Select Subcatagories</option>
+                       <?php foreach ($subCatagories as $key => $subCatagories) {?>
+                        <option value="<?=$subCatagories->subId?>" 
+                          <?php if($content[0]->sub_catgId==$subCatagories->subId){ echo "selected";}?> ><?=$subCatagories->name?></option>
+                    <?php } ?>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label class="col-lg-12 col-form-label" for="example-textarea">Short Desc.</label>
+                  <div class="col-lg-12">
+                    <textarea class="form-control" rows="5" placeholder="Enter desc." name="description" id="example-textarea"><?=$content[0]->description?></textarea>
+                  </div>
+                </div>
+                <div class="ottfloat col-md-4">
+                  <label class="col-lg-12 col-form-label">Platform</label>
+                  <div class="col-lg-12">
+                    <select class="form-control custom-select" id="platform" name="platformId" placeholder="platform">
+                      <option>Select platform</option>
+                        <?php foreach ($platform as $key => $platform) {?>
+                      <option value="<?=$platform->pId?>"    <?php if($content[0]->platformId==$platform->pId){ echo "selected";}?> ><?=$platform->name?></option>
+                  <?php } ?> 
+                    </select>
+                  </div>
+                </div>
+                <div class="ottfloat col-md-4">
+                  <label class="col-lg-12 col-form-label">OTT Content Type</label>
+                  <div class="col-lg-10">
+                    <select class="form-control custom-select" id="ott type" name="ottcontentTypeId" placeholder="ott type">
+                      <option selected="1">video</option>
+                        
+                    </select>
+                  </div>
+                </div>
+                <div class="ottfloat col-md-4">
+                  <label class="col-lg-12 col-form-label">Ott Type</label>
+                  <div class="col-lg-10">
+                   
+                    <select class="form-control custom-select" id="ottType_Id" name="ottType_Id" onchange="showDiv(this)">
+                    <option value="">Ott Type</option>
+                         <?php foreach ($ottType as $key => $ottType) {?>
+                        <option value="<?=$ottType->ottTypeId?>" <?php if($content[0]->ottType_Id==$ottType->ottTypeId){ echo "selected";}?> ><?=$ottType->name?></option>
+                      <?php } ?> 
+                    </select>
+
+                  </div>
+                </div>
+
+            <div id="hidden_div" style="display:none;">
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Season</label>
+                  <div class="col-lg-10">
+                    <input type="season" class="form-control" id="season" placeholder="Enter season number" name="<?=$content[0]->sesson?>">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Episode</label>
+                  <div class="col-lg-10">
+                    <input type="episode" class="form-control" id="episode" placeholder="Enter episode number" name="<?=$content[0]->episode?>">
+                  </div>
+                </div>
+          </div>      
+
+          <script type="text/javascript">
+            function showDiv(select){
+               if(select.value==3){
+                document.getElementById('hidden_div').style.display = "block";
+               } 
+            } 
+        </script>
+
+
+                <div class="form-group row">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table m-0">
+                        <thead>
+                          <tr>
+                            <th colspan="6"> <label class="col-lg-12 col-form-label" style="margin-top: 20px;">Select Genre.</label></th>
+                          </tr>
+                         
+
+                          <tr>
+
+                           <?php $people =   explode(",",$wrng_contentGenreAll); ?>
+
+
+
+                        <?php foreach ($wrng_genre as $key => $wrng_genre) {?>
+                            <td style="float:left;"><div class="mt-3">
+                                <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" id="customCheck<?=$wrng_genre->gId?>" value="<?=$wrng_genre->gId?>" name="genre[]"
+
+                                    <?php if(in_array($wrng_genre->gId, $people)){ echo "checked";} ?> >
+                                  <label class="custom-control-label" for="customCheck<?=$wrng_genre->gId?>"><?=$wrng_genre->name?></label>
+                                </div>
+                              </div></td>
+
+                        <?php }    ?>
+
+                              
+                          </tr>
+                           
+
+                        </tbody>
+                      </table>
+
+
+
+                        <div class="clearfix"> </div>
+                        <div style="width: 100%; float: left; display: inline-block;">
+                        <td>
+                        <input type="checkbox" id="myCheck" onclick="myFunction()">
+                        <label for="myCheck">Any Other (Please specify)</label> 
+                        <input class="form-control" placeholder="Type Your Specify" id="text" style="display:none">
+                        <script>
+                        function myFunction() {
+                          var checkBox = document.getElementById("myCheck");
+                          var text = document.getElementById("text");
+                          if (checkBox.checked == true){
+                            text.style.display = "block";
+                          } else {
+                             text.style.display = "none";
+                          }
+                        }
+                        </script>
+                        </td>
+                        </div>
+
+
+                    </div>
+                  </div>
+                </div>
+                <div class="ottfloat col-md-6">
+                  <label class="col-lg-12 col-form-label">Year of Release</label>
+                  <div class="col-lg-12">
+                    <input type="text" id="basic-datepicker" class="form-control" placeholder="Year of Release" name="releaseYear" value="<?=$content[0]->releaseYear?>">
+                  </div>
+                </div>
+                <div class="ottfloat col-md-6">
+                  <label class="col-lg-12 col-form-label">Name of Editor</label>
+                  <div class="col-lg-12">
+                    <input type="text" class="form-control" id="editorName" placeholder="Enter editor name" name="editorName" value="<?=$content[0]->editorName?>">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-12 col-form-label" for="simpleinput"></label>
+                  <div class="col-lg-12">
+                    <input type="submit" class="btn btn-primary" name="submitGeneral" value="Submit">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+</form>
+
+
+
+
+      <form method="post" action="" enctype="multipart/form-data">
+          <div class="card mb-1"> <a href="" class="text-dark collapsed" data-toggle="collapse" data-target="#customaccorcollapseTwo" aria-expanded="false" aria-controls="customaccorcollapseTwo">
+            <div class="card-header" id="customaccorheadingTwo">
+              <h5 class="m-0 font-size-14"> <i class="uil uil-question-circle h3 text-primary icon"></i> Cast Information </h5>
+            </div>
+            </a>
+            <div id="customaccorcollapseTwo" class="collapse" aria-labelledby="customaccorheadingTwo" data-parent="#customaccordion_exa">
+              <div class="card-body text-muted">
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Add Your Cast Name</label>
+                  <div class="col-lg-10">              
+                    <input type="cast" class="form-control" id="cast" placeholder="Cast Name" name="cast_name" style="width: 82%; float: right;">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Photo</label>
+                  <div class="col-lg-10">
+                    <div style="width: 82%; float: right;">
+                      <input name="cast_image[]" type="file" multiple>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-lg-4 col-form-label" for="simpleinput"></label>
+                  <div class="col-lg-8">
+                    <input type="submit" class="btn btn-primary" name="castSubmit" value="Upload">
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 castscroll">
+
+                  <style> 
+                    .castscroll{float: left; overflow-x: scroll; margin-bottom: 12px;}
+                    .actorbox{float: left;}
+                    .castbox{float: left; background-color: #fff; border:1px #ddd solid; position: relative; overflow: hidden;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    border-radius: 10px;
+                    }
+                    .castpic{float: left; width: 100%;}
+                   .castpic img {
+					    width: 100%;
+					    height: 110px;
+					    min-height: 110px;
+					    overflow: hidden;
+					}
+					.vidbox img {
+					    width: 100% !important;
+					    height: 80px !important;
+					    min-height: 80px !important;
+					    overflow: hidden;
+					}
+                    .castdetails{width: 100%; float: left;}
+                    .castdetails h2{font-size: 14px; padding-left: 8px;}
+                    .castdel{position: absolute; right: 5px; bottom: 5px;}
+                  </style>
+
+                  <div class="col-md-12" style="margin-bottom: 10px;">Image Size: W:180px X H:180px</div>
+                  <div class="clearfix"></div>
+                  
+
+                  <?php foreach ($wrng_cast as $key => $wrng_cast) {?>
+                  
+
+                  <div class="col-md-2 actorbox"> 
+                      <div class="castbox"> 
+                          <div class="castpic"><img src="<?php echo SITE_URL;?>assets/castImage/<?=$wrng_cast->cast_image;?>"></div>
+                          <div class="castdetails">
+                          <h2>Ram</h2>
+                          <a href="<?php echo SITE_URL_INDEX;?>OttContent/delete/wrng_cast/<?=$wrng_cast->id;?>/upload-new-otts/<?=$content[0]->contentId?>" onclick="alert('are you sure you want to delete!');" class="castdel"><i class="mdi mdi-delete-forever"></i></a>
+                        </div>
+                      </div>
+                  </div>
+
+                  <?php } ?>       
+
+ 
+                </div>
+                <div class="clearfix text-right mt-3"> 
+                  <!--<button type="button" class="btn btn-danger"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>--> 
+                </div>
+              </div>
+            </div>
+          </div>
+</form>
+
+
+           <div class="card mb-0" style="margin-bottom: 4px !important;"> <a href="" class="text-dark collapsed" data-toggle="collapse" data-target="#customaccorcollapseThree" aria-expanded="false" aria-controls="customaccorcollapseThree">
+            <div class="card-header" id="customaccorheadingThree">
+              <h5 class="m-0 font-size-14"> <i class="uil uil-question-circle h3 text-primary icon"></i> Image Information </h5>
+            </div>
+            </a>
+            <div id="customaccorcollapseThree" class="collapse" aria-labelledby="customaccorheadingThree" data-parent="#customaccordion_exa">
+              <div class="card-body text-muted">
+               
+ <form method="post" action="" enctype="multipart/form-data"> 
+                <div class="form-group row">
+
+
+                  <label class="col-lg-2 col-form-label">Upload Thumbnail Image</label>
+                  <div class="col-lg-2 actorbox">
+                  	<div class="castbox">
+                    <div class="castpic">
+                      <?php if(empty($content[0]->thumbnailImage)){?>
+                      <input type="file" class="form-control" name="thumbnailImage">
+<?php } ?>
+
+                   <?php if($content[0]->thumbnailImage!=""){?>
+                      <img src="<?=SITE_URL?>assets/thumbnailImage/<?=$content[0]->thumbnailImage?>">
+                      <a href="<?php echo SITE_URL_INDEX;?>OttContent/deleteThumbnailImage/<?=$content[0]->contentId?>" onclick="alert('are you sure you want to delete!');" class="castdel"><i class="mdi mdi-delete-forever"></i></a>
+                   <?php } ?>      
+
+
+
+                    </div>
+                  </div>
+              </div>
+                </div>
+                 <div class="form-group row">
+                  <label class="col-lg-2 col-form-label" for="simpleinput"></label>
+                  <div class="col-lg-10">
+                       <?php if(empty($content[0]->thumbnailImage)){?>
+                       <input type="submit" class="btn btn-primary" name="submitThumbnail" value="Upload">
+                     <?php } ?>
+                  </div>
+                </div>
+ </form>               
+
+         <form method="post" action="" enctype="multipart/form-data">       
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Upload Banner Images</label>
+                  <div class="col-lg-10">
+                    <div>
+                      <input type="file" name="image_path[]" multiple="" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label" for="simpleinput"></label>
+                  <div class="col-lg-10">
+                    <input type="submit" class="btn btn-primary" name="submitBanner" value="Upload">
+
+                  </div>
+                </div>
+      </form>
+
+
+
+            <div class="col-md-12" style="margin-bottom: 10px;">Banner Size: W:1000px X H:400px</div>
+            <div class="clearfix"></div>
+
+            <div class="clearfix"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 castscroll">
+
+
+              <?php foreach ($content_image as $key => $content_image) {?>
+
+                <div class="col-md-3 actorbox vidbox" style="float: left;"> 
+                      <div class="castbox"> 
+                          <div class="castpic"><img src="<?php echo SITE_URL;?>assets/bannerImage/<?=$content_image->image_path;?>"></div>
+                          <div class="castdetails">
+                          <a href="<?php echo SITE_URL_INDEX;?>OttContent/delete/content_image/<?=$content_image->id;?>/upload-new-otts/<?=$content[0]->contentId?>" onclick="alert('are you sure you want to delete!');" class="castdel"><i class="mdi mdi-delete-forever"></i></a>
+                        </div>
+                      </div>  
+                  </div>
+
+             <?php } ?>   
+
+          </div>
+
+
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="card mb-0" style="margin-top: -17px;"> <a href="" class="text-dark collapsed" data-toggle="collapse" data-target="#customaccorcollapse4" aria-expanded="false" aria-controls="customaccorcollapse4">
+            <div class="card-header" id="customaccorheading4">
+              <h5 class="m-0 font-size-14"> <i class="uil uil-question-circle h3 text-primary icon"></i> Video Information </h5>
+            </div>
+            </a>
+      <form method="post" action="" enctype="multipart/form-data">
+           
+            <div id="customaccorcollapse4" class="collapse" aria-labelledby="customaccorheading4" data-parent="#customaccordion_exa">
+              <div class="card-body text-muted">
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Video Platform</label>
+                  <div class="col-lg-10">
+                    <select class="form-control custom-select" id="videoPlatform" name="videoPlatform" placeholder="Video Platform">
+                      <option>Select video platform</option>
+                      <option selected="">  netfilx</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Video Preview Image</label>
+                  <div class="col-lg-10">
+                    <div> <input type="file" name="video_image">
+
+                      
+
+
+                     <?php if(isset($wrng_content_video_url)){ ?>
+                      <img src="<?=SITE_URL?>assets/videoImage/<?=$wrng_content_video_url[0]->video_image?>" style="width: auto;
+    height: 100px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;">
+                    <?php } ?>
+                          <span class="text-muted font-13">(Upload Video Image)</span> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Video Url</label>
+                  <div class="col-lg-10">
+                    <input type="Video Url" class="form-control" id="video_url" placeholder="Enter Video url" value="<?=$wrng_content_video_url[0]->video_url?>" name="video_url">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Video Duration</label>
+                  <div class="col-lg-10">
+                    <input type="number" class="form-control" id="duration" placeholder="Video Duration in minute" name="duration" value="<?php if(isset($wrng_content_video_url)){$wrng_content_video_url[0]->duration;}?>">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label" for="simpleinput"></label>
+                  <div class="col-lg-10">
+                    <input type="submit" class="btn btn-primary" name="videoSubmit" value="Submit">
+                  </div>
+                </div>
+
+                <div class="clearfix text-right mt-3"> 
+                  <!--<button type="button" class="btn btn-danger"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>--> 
+                </div>
+              </div>
+        </form>     
+         
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card--> 
+  </div>
+  <!-- end col --> 
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showingMsg2(did) { 
+  $('#pubIdSh2').html(did);
+}
+function myFunction1() { 
+  condemnId=$('#condId').val();
+  $('#myModa22').modal("hide");
+  var urlI='<?php echo base_url(); ?>deletereviewer/'+condemnId;
+  window.location.href = urlI;
+}
+</script>   
+    
+        <?php include('template/footer.php'); ?>
+      </div>
+    </div>
+  </div>
+
+  <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/popper.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/perfect-scrollbar.jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/Chart.min.js"></script>
+  <script src="<?php echo base_url(); ?>js/off-canvas.js"></script>
+  <script src="<?php echo base_url(); ?>js/misc.js"></script>
+  <script src="<?php echo base_url(); ?>js/dashboard.js"></script>
+</body>
+
+</html>
